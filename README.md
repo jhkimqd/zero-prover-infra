@@ -91,6 +91,23 @@ i=<block_number>
 cast block --rpc-url $(kurtosis port print my-testnet el-2-erigon-lighthouse ws-rpc) --json > ./block_$i.json
 ```
 
+## Installing Helm Charts with Helmfile
+
+The below steps show a manual approach to installation, which can also be simplified with [helmfile](https://github.com/helmfile/helmfile).
+
+### Connect to the GKE Cluster
+```!
+gcloud auth login
+# You might need to run: gcloud components install gke-gcloud-auth-plugin
+gcloud container clusters get-credentials zero-prover-test-01 --zone=europe-west1-c
+kubectl get namespaces
+```
+
+1. [Install](https://github.com/helmfile/helmfile?tab=readme-ov-file#installation) helmfile.
+2. Head to this repository's root directory, where `helmfile.yaml` is.
+3. Run `helmfile init` and install all necessary dependencies.
+4. Run `helmfile apply` to install the packages and charts. 
+
 ## Usage
 
 To be able to run the type 1 prover infrastructure, you will need:
